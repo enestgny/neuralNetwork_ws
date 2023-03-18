@@ -1,0 +1,8 @@
+prefix=/home/enes/neuralNetwork_ws/devel
+
+Name: neural_network
+Description: Description of neural_network
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

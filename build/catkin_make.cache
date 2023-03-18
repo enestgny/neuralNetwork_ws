@@ -1,0 +1,2 @@
+neural_network
+-DCATKIN_DEVEL_PREFIX=/home/enes/neuralNetwork_ws/devel -DCMAKE_INSTALL_PREFIX=/home/enes/neuralNetwork_ws/install -G Unix Makefiles
