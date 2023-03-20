@@ -6,16 +6,18 @@ from train import Train
 import joblib
 import numpy as np
 
+path = '/home/enes'
+
 class ReturnValue():
     def __init__(self,withName,b):
         self.withName = withName
         self.b = b
 
 def start(data):
-    w = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/weights1.sav')
-    w2 = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/weights2.sav')
-    bias = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/bias1.sav')
-    bias2 = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/bias2.sav')
+    w = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights1.sav')
+    w2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights2.sav')
+    bias = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias1.sav')
+    bias2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias2.sav')
     withName = data
     print(withName)
     withoutName = np.delete(withName,4)
@@ -28,7 +30,7 @@ def start(data):
     return ReturnValue(withName,b)
 
 def callback(data):
-    m = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/m.sav')
+    m = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/m.sav')
     result1=data.data
     result = start(result1) 
     print(result.b)
@@ -47,7 +49,7 @@ def callback(data):
         if result.withName[-1] != 3:
             m+= 1
             print(f'Wrong {m}')
-    joblib.dump(m,'/home/enes/neuralNetwork_ws/src/neural_network/results/m.sav')
+    joblib.dump(m,path+'/neuralNetwork_ws/src/neural_network/results/m.sav')
 
 
 def listener():

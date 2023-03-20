@@ -9,10 +9,10 @@ class test():
 
     def start(self):
         m = 0
-        w = joblib.load('/home/enes/catkin_ws/src/beginner_tutorials/results/weights1.sav')
-        w2 = joblib.load('/home/enes/catkin_ws/src/beginner_tutorials/results/weights2.sav')
-        bias = joblib.load('/home/enes/catkin_ws/src/beginner_tutorials/results/bias1.sav')
-        bias2 = joblib.load('/home/enes/catkin_ws/src/beginner_tutorials/results/bias2.sav')
+        w = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/weights1.sav')
+        w2 = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/weights2.sav')
+        bias = joblib.load('//home/enes/neuralNetwork_ws/src/neural_network/results/bias1.sav')
+        bias2 = joblib.load('/home/enes/neuralNetwork_ws/src/neural_network/results/bias2.sav')
         Test = Definition(self.csv)           #Ve sistemimizi tahmin yapabilir duruma getirmiş oluyoruz.
         CSV = Definition(self.csv)
         for k in range(len(Test.Species)):

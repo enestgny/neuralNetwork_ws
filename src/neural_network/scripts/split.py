@@ -4,7 +4,8 @@ import pandas as pd
 from test import test
 from train import neuralNetwork
 
-df = pd.read_csv('/home/enes/neuralNetwork_ws/src/neural_network/Iris.csv')
+path = '/home/enes'
+df = pd.read_csv(path+'/neuralNetwork_ws/src/neural_network/Iris.csv')
 column_name='Species'
 targets=np.array(df[column_name])
 df.drop(columns='Id',inplace=True)
@@ -19,7 +20,7 @@ for i in range(len(targets)):
         targets[i] = 3
 
 x_train,x_test,y_train,y_test =  train_test_split(x_type,targets,test_size=0.01,shuffle=True)
-pd.DataFrame(x_train).to_csv("/home/enes/neuralNetwork_ws/src/neural_network/csv/train.csv")
-pd.DataFrame(x_test).to_csv("/home/enes/neuralNetwork_ws/src/neural_network/csv/test.csv")
+pd.DataFrame(x_train).to_csv(path+"/neuralNetwork_ws/src/neural_network/csv/train.csv")
+pd.DataFrame(x_test).to_csv(path+"/neuralNetwork_ws/src/neural_network/csv/test.csv")
 
-neuralNetwork('/home/enes/neuralNetwork_ws/src/neural_network/csv/train.csv').start()
+neuralNetwork(path+'/neuralNetwork_ws/src/neural_network/csv/train.csv').start()

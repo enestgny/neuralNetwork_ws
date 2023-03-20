@@ -6,7 +6,7 @@ import joblib
 
 plot_x2 = []
 plot_y2 = []
-
+path = '/home/enes'
 
 
 class ReturnValue():                      #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
@@ -119,7 +119,7 @@ class neuralNetwork():
         plt.title("Value of error function")#Grafiğe isim verme
         plt.plot(plot_x2,plot_y2,color ="red")
         plt.show()
-        joblib.dump(w,'/home/enes/neuralNetwork_ws/src/neural_network/results/weights1.sav')
-        joblib.dump(w2,'/home/enes/neuralNetwork_ws/src/neural_network/results/weights2.sav')
-        joblib.dump(bias,'/home/enes/neuralNetwork_ws/src/neural_network/results/bias1.sav')
-        joblib.dump(bias2,'/home/enes/neuralNetwork_ws/src/neural_network/results/bias2.sav')
+        joblib.dump(w,path+'/neuralNetwork_ws/src/neural_network/results/weights1.sav')
+        joblib.dump(w2,path+'/neuralNetwork_ws/src/neural_network/results/weights2.sav')
+        joblib.dump(bias,path+'/neuralNetwork_ws/src/neural_network/results/bias1.sav')
+        joblib.dump(bias2,path+'/neuralNetwork_ws/src/neural_network/results/bias2.sav')

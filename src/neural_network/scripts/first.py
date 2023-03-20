@@ -4,14 +4,16 @@ import numpy as np
 import rospy
 from std_msgs.msg import Float64MultiArray
 import joblib
+
 m = 0
-joblib.dump(m,'/home/enes/neuralNetwork_ws/src/neural_network/results/m.sav')
+path = '/home/enes'
+joblib.dump(m,path+'/neuralNetwork_ws/src/neural_network/results/m.sav')
 
 class ReturnValue():                      #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
     def __init__(self):
         self.data = None
         self.Species = None
-        self.CSV = self.Definition('/home/enes/neuralNetwork_ws/src/neural_network/csv/test.csv')
+        self.CSV = self.Definition(path+'/neuralNetwork_ws/src/neural_network/csv/test.csv')
 
     def Definition(self, a):
         data = pd.read_csv(a)
