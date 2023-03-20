@@ -23,4 +23,3 @@ pd.DataFrame(x_train).to_csv("/home/enes/neuralNetwork_ws/src/neural_network/csv
 pd.DataFrame(x_test).to_csv("/home/enes/neuralNetwork_ws/src/neural_network/csv/test.csv")
 
 neuralNetwork('/home/enes/neuralNetwork_ws/src/neural_network/csv/train.csv').start()
-test('/home/enes/neuralNetwork_ws/src/neural_network/csv/test.csv').start()
