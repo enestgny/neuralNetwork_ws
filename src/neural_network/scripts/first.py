@@ -9,7 +9,7 @@ m = 0
 path = '/home/enes'
 joblib.dump(m,path+'/neuralNetwork_ws/src/neural_network/results/m.sav')
 
-class ReturnValue():                      #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
+class ReturnValue():                                                         #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
     def __init__(self):
         self.data = None
         self.Species = None
@@ -17,28 +17,28 @@ class ReturnValue():                      #İstediğmiz herhangi bir csv dosyas�
 
     def Definition(self, a):
         data = pd.read_csv(a)
-        x_data = np.array(data)# Csv dosyasından alınan datayı array şeklinde numpy ile düzenliyoruz
-        Species = np.delete(x_data,0,1)#[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm, [4]: Species
+        x_data = np.array(data)                                              #Csv dosyasından alınan datayı array şeklinde numpy ile düzenliyoruz
+        Species = np.delete(x_data,0,1)                                      #[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm, [4]: Species
 
-        for j in range(len(Species)):  #Matris içindeki string verileri backward işleminde kullanabilmek için int verilere çeviriyoruz.
+        for j in range(len(Species)):                                        #Matris içindeki string verileri backward işleminde kullanabilmek için int verilere çeviriyoruz.
             if Species[j,4] == 'Iris-setosa':
                 Species[j,4] = 1
             elif Species[j,4] == 'Iris-versicolor':
                 Species[j,4] = 2
             elif Species[j,4] == 'Iris-virginica':
                 Species[j,4] = 3
-        x = np.delete(Species,4,1)#[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm
-        return Species #Returnde class yazarak fonksiyondan birden çok çıktı alabiliyoruz.
+        x = np.delete(Species,4,1)                                           #[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm
+        return Species                                                       #Returnde class yazarak fonksiyondan birden çok çıktı alabiliyoruz.
 
     def talker(self):
-        pub1= rospy.Publisher('chatter_v1',Float64MultiArray, queue_size=10)
-        rate = rospy.Rate(100) # 10hz
+        pub1= rospy.Publisher('chatter_v1',Float64MultiArray, queue_size=10) #chatter_v1 stringini kullanarak, Float64 türünde yayınlanmasını sağlar
+        rate = rospy.Rate(100)                                               #Hz cinsinden gönderme sıklığını söyler
         data3 = Float64MultiArray()
         for i in range(len(self.CSV)):
             print(i)
             print(self.CSV[i])
             data3.data= np.array(self.CSV[i],dtype=np.float32)
-            pub1.publish(data3)
+            pub1.publish(data3)                                             #verileri yayınlar
             rate.sleep()
         
 

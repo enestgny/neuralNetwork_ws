@@ -14,7 +14,7 @@ class test():
         w2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights2.sav')
         bias = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias1.sav')
         bias2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias2.sav')
-        Test = Definition(self.csv)           #Ve sistemimizi tahmin yapabilir duruma getirmiş oluyoruz.
+        Test = Definition(self.csv)                     #Ve sistemimizi tahmin yapabilir duruma getirmiş oluyoruz.
         CSV = Definition(self.csv)
         for k in range(len(Test.Species)):
             K1 = Train(w,bias,CSV.x[k],CSV.Species[k,4])
@@ -26,7 +26,7 @@ class test():
 
             if   0 < b < 1.4:
                 print(k+1,b,'Iris-setosa',Test.x_data[k,5])
-                if Test.x_data[k,5] != 'Iris-setosa': #Hataların olduğunu ve kaç tane olduğunu çıktı olarak göstermesi
+                if Test.x_data[k,5] != 'Iris-setosa':  #Hataların olduğunu ve kaç tane olduğunu çıktı olarak göstermesi
                     m += 1
                     print(f'Wrong {m}') 
             elif 1.4 < b < 2.3:

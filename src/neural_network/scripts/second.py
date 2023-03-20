@@ -14,14 +14,13 @@ class ReturnValue():
         self.b = b
 
 def start(data):
-    w = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights1.sav')
+    w = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights1.sav')       
     w2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/weights2.sav')
     bias = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias1.sav')
     bias2 = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/bias2.sav')
     withName = data
-    print(withName)
     withoutName = np.delete(withName,4)
-    K1 = Train(w,bias,withoutName,withName[-1])
+    K1 = Train(w,bias,withoutName,withName[-1])                  #Alınan verilerin sinir ağına iletilmesi
     aa = K1.ileriYayilim()
     a = K1.ActivationFuncLeakyRelu(aa)
     bbb = Train(w2,bias2,a,withName[-1])
@@ -32,12 +31,12 @@ def start(data):
 def callback(data):
     m = joblib.load(path+'/neuralNetwork_ws/src/neural_network/results/m.sav')
     result1=data.data
-    result = start(result1) 
+    result = start(result1)
     print(result.b)
     if   0 < result.b < 1.4:
         print('Result: Iris-setosa ', result.b)
-        if result.withName[-1] != 1: #Hataların olduğunu ve kaç tane olduğunu çıktı olarak göstermesi
-            m += 1
+        if result.withName[-1] != 1:                            #Hataların olduğunu ve kaç tane olduğunu çıktı olarak göstermesi
+            m += 1  
             print(f'Wrong {m}') 
     elif 1.4 < result.b < 2.3:
         print('Result:Iris-versicolor  ', result.b)
@@ -54,7 +53,7 @@ def callback(data):
 
 def listener():
     rospy.init_node('second', anonymous=True)
-    rospy.Subscriber('chatter_v1', Float64MultiArray , callback)
+    rospy.Subscriber('chatter_v1', Float64MultiArray , callback)#Bilgileri alır
     rospy.spin()
 
 if __name__ == '__main__':

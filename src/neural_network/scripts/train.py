@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from matplotlib import pyplot as plt #Grafik oluşturmak için
+from matplotlib import pyplot as plt                                    #Grafik oluşturmak için
 import numpy as np
 import pandas as pd
 import joblib
@@ -9,7 +9,7 @@ plot_y2 = []
 path = '/home/enes'
 
 
-class ReturnValue():                      #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
+class ReturnValue():                                                    #İstediğmiz herhangi bir csv dosyasını rahat bir şekilde okuyabilmek için
     def __init__(self,data,x_data,Species,x):
         self.data = data
         self.Species = Species
@@ -18,18 +18,18 @@ class ReturnValue():                      #İstediğmiz herhangi bir csv dosyas�
 
 def Definition(a):
     data = pd.read_csv(a)
-    x_data = np.array(data)# Csv dosyasından alınan datayı array şeklinde numpy ile düzenliyoruz
-    Species = np.delete(x_data,0,1)#[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm, [4]: Species
+    x_data = np.array(data)                                             #Csv dosyasından alınan datayı array şeklinde numpy ile düzenliyoruz
+    Species = np.delete(x_data,0,1)                                     #[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm, [4]: Species
 
-    for j in range(len(Species)):  #Matris içindeki string verileri backward işleminde kullanabilmek için int verilere çeviriyoruz.
+    for j in range(len(Species)):                                       #Matris içindeki string verileri backward işleminde kullanabilmek için int verilere çeviriyoruz.
         if Species[j,4] == 'Iris-setosa':
             Species[j,4] = 1
         elif Species[j,4] == 'Iris-versicolor':
             Species[j,4] = 2
         elif Species[j,4] == 'Iris-virginica':
             Species[j,4] = 3
-    x = np.delete(Species,4,1)#[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm
-    return ReturnValue(data,x_data,Species,x) #Returnde class yazarak fonksiyondan birden çok çıktı alabiliyoruz.
+    x = np.delete(Species,4,1)                                          #[0]:SepalLengthCm, [1]:SepalWidthCm, [2]:PetalLengthCm, [3]:PetalWidthCm
+    return ReturnValue(data,x_data,Species,x)                           #Returnde class yazarak fonksiyondan birden çok çıktı alabiliyoruz.
 
 class Train():
     def __init__(self,weight,bias,data,yDegeri):
@@ -67,7 +67,7 @@ class Train():
         z = np.dot(self.weight,self.data) + self.bias
         return z
     
-    def derivative(self,L2,R2,X,w2):#Geri yayılımda türevli ifadelerin değerlerinin bulunması
+    def derivative(self,L2,R2,X,w2):                                    #Geri yayılımda türevli ifadelerin değerlerinin bulunması
         dZ2 = L2 - self.yDegeri
         dW2 = dZ2.dot(R2.T.reshape(1,3))
         db2 = np.sum(dZ2)
@@ -76,7 +76,7 @@ class Train():
         db1 = np.sum(dZ1)
         return dW1, db1, dW2, db2
     
-    def backward(self,w2,dW1, db1, dW2, db2,b2,w,bias):# Bias ve ağırlık değerlerinin güncellenmesi
+    def backward(self,w2,dW1, db1, dW2, db2,b2,w,bias):                 #Bias ve ağırlık değerlerinin güncellenmesi
         alpha = 0.01
         w = w - alpha * dW1
         bias = bias - alpha * db1    
@@ -94,14 +94,14 @@ class neuralNetwork():
     
     def start(self):
         p=0
-        arg = np.random.default_rng(1) #Random sayı üretmek için
+        arg = np.random.default_rng(1)                                 #Random sayı üretmek için
         w = arg.random((3,4))
         w2 = arg.random((1,3))
         bias = arg.random()
         bias2 = arg.random()
         CSV = Definition(self.csv)
-        for k in range(10):#Çok katmanlıda sadece değerleri döndürmek yetmedi. Döngüyü arttırdığımda hatalı bulduğu değer sayısı azaldı.
-            for i in range(len(CSV.data)):              # Tanımladığımız  fonksiyonlara datamızı okutuyoruz.
+        for k in range(10):                                            #Çok katmanlıda sadece değerleri döndürmek yetmedi. Döngüyü arttırdığımda hatalı bulduğu değer sayısı azaldı.
+            for i in range(len(CSV.data)):                             #Tanımladığımız  fonksiyonlara datamızı okutuyoruz.
                 p+= 1
                 R1 = Train(w,bias,CSV.x[i],CSV.Species[i,4])
                 R22 = R1.ileriYayilim()
@@ -114,9 +114,9 @@ class neuralNetwork():
                 print('Error',L3)
                 dW1, db1, dW2, db2 = R1.derivative(L2,R2,CSV.x[i],w2)
                 w2,bias2,w,bias = R1.backward(w2,dW1, db1, dW2, db2,bias2,w,bias)
-                plot_x2.append(p) #Grafik oluşturabilmek için değerlerimizi liste şeklinde topluyoruz.
+                plot_x2.append(p)                                     #Grafik oluşturabilmek için değerlerimizi liste şeklinde topluyoruz.
                 plot_y2.append(L3)
-        plt.title("Value of error function")#Grafiğe isim verme
+        plt.title("Value of error function")                          #Grafiğe isim verme
         plt.plot(plot_x2,plot_y2,color ="red")
         plt.show()
         joblib.dump(w,path+'/neuralNetwork_ws/src/neural_network/results/weights1.sav')
